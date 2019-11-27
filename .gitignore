@@ -1,0 +1,10 @@
+data/processed
+test/test_files
+test/result.txt
+
+.venv
+.Rhistory
+.nextflow*
+work
+.mypy_cache
+.vscode

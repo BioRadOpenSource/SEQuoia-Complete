@@ -1,0 +1,146 @@
+
+{
+	"parameters": [
+		{
+			"name": "reads",
+			"label": "Path to fastq reads",
+			"usage": "Tese must be wrapped in single quotes. If R{1,2} is specified, UMI deduplication processes will be run.",
+			"type": "string",
+			"renderer": "file",
+			"group": "invisible",
+			"pattern": ".*(R1_*\\.fastq\\.gz$|R2_*\\.fastq\\.gz$)",
+			"required": true
+
+		},
+		{
+			"name": "genomes_base",
+			"label": "Reference genome base path",
+			"usage": "Bio-Rad formatted refence genomes and annotations",
+			"type": "string",
+			"renderer": "file",
+			"group": "invisible",
+			"required": true
+		},
+		{
+			"name": "outDir",
+			"label": "Output path",
+			"usage": "Indicate the output directory to write to",
+			"type": "string",
+			"renderer": "file",
+			"default_value": "./results",
+			"group": "invisible"
+		},
+		{
+			"name": "skipUmi",
+			"label": "Skip UMI processing",
+			"usage": "Indicate that only R1 has been passed in and no UMI processing is required",
+			"type": "boolean",
+			"renderer": "check-box",
+			"default_value": false,
+			"group": "options"
+		},
+		{
+			"name": "genome",
+			"label": "Species",
+			"usage": "Genome to align to and annotate against",
+			"type": "string",
+			"renderer": "drop-down",
+			"group": "options",
+			"choices": ["hg38", "mm10", "rnor6"],
+			"required": true
+		},
+		{
+			"name": "spikeType",
+			"label": "Spike in type",
+			"usage": "The type of spike in used, if any",
+			"type": "string",
+			"renderer": "drop-down",
+			"default_value": "NONE",
+			"group": "advanced",
+			"choices": ["NONE", "ercc"]
+		},
+		{
+			"name": "minMapqToCount",
+			"label": "Minimum MapQ score to count",
+			"usage": "The minimum MapQ socre for an aligned read to count toward a feature count",
+			"type": "integer",
+			"renderer": "range",
+			"default_value": "1",
+			"group": "advanced",
+			"choices": [0, 255]
+		},
+		{
+			"name": "minBp",
+			"label": "Min base pairs per read",
+			"usage": "Reads with fewer base pairs will be rejected",
+			"type": "intger",
+			"renderer": "range",
+			"default_value": 15,
+			"group": "advanced",
+			"choices": [0, 500]
+		},
+		{
+			"name": "validateInputs",
+			"label": "Validate Input Reads",
+			"usage": "Ensure input meets standards and is below 500 million reads",
+			"type": "boolean",
+			"renderer": "check-box",
+			"default_value": true,
+			"group": "invisible"
+		},
+		{
+			"name": "reverseStrand",
+			"label": "Is the libarary reverse stranded?",
+			"usage": "Indicate if your library is reverse stranded",
+			"type": "boolean",
+			"renderer": "check-box",
+			"default_value": false,
+			"group": "invisible"
+		},
+		{
+			"name": "noTrim",
+			"label": "Skip read trimming?",
+			"usage": "Indicates whether or not trimming skipped on the reads",
+			"type": "boolean",
+			"renderer": "check-box",
+			"default_value": false,
+			"group": "advanced"
+		},
+		{
+			"name": "fivePrimeQualCutoff",
+			"label": "5' read quality cutoff",
+			"usage": "The read quality below which bases will be trimmed on the 5' end",
+			"type": "integer",
+			"renderer": "range",
+			"default_value": 0,
+			"group": "advanced",
+			"choices": [0, 42]
+		},
+		{
+			"name": "threePrimeQualCutoff",
+			"label": "3' read quality cutoff",
+			"usage": "The read quality below which bases will be trimmed on the 3' end",
+			"type": "integer",
+			"renderer": "range",
+			"default_value": 0,
+			"group": "advanced",
+			"choices": [0, 42]
+		},
+		{
+			"name": "max_cpus",
+			"label": "Max CPUs",
+			"usage": "The max number of cpus the pipeline may use. Defaults provided by -profile.",
+			"type": "integer",
+			"renderer": "range",
+			"group": "invisible"
+		},
+		{
+			"name": "max_memory",
+			"label": "Max Memory",
+			"usage": "The max memory in GB that the pipeline may use. Defaults provided by -profile.",
+			"type": "integer",
+			"renderer": "range",
+			"group": "invisible"
+		}
+	]
+}
