@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 LABEL Bio-Rad Support <support@bio-rad.com>
 
@@ -13,8 +13,16 @@ RUN apt-get update && apt-get install -y \
     samtools \
     zlib1g-dev \
     libbz2-dev \
-    liblzma-dev
- 
+    liblzma-dev \
+    libfontconfig1-dev
+
+######### Fix time and date interaction
+RUN export DEBIAN_FRONTEND=noninteractive
+RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
+RUN apt-get install -y tzdata
+RUN dpkg-reconfigure --frontend noninteractive tzdata
+######################################
+
 
 ######### FastQC Setup ###############
 RUN apt-get install -y \
@@ -38,10 +46,8 @@ ENV PATH ${DEST_DIR}/FastQC:$PATH
 ######### Cutadapt Setup #############
 RUN apt-get install -y \
     python3-pip
-RUN pip3 install --upgrade pip setuptools
-
-RUN pip3 install --upgrade pip setuptools
-RUN pip3 install --user --upgrade cutadapt
+RUN pip3 install --upgrade pip
+RUN pip3 install --user --upgrade 'cutadapt==2.7'
 RUN ln -s ~/.local/bin/cutadapt /usr/bin/
 ######### End Cutadapt Setup #########
 
