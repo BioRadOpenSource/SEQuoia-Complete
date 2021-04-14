@@ -254,11 +254,11 @@ if (!params.skipUmi) {
         script:
         (bam, bai) = bams
         """
-        samtools idxstats $bam | cut -f 1 | grep chr > ./Aligned.sortedByCoord.idxstats.txt
+        samtools idxstats $bam | cut -f 1 | grep -E 'chr|ERCC-*' > ./Aligned.sortedByCoord.idxstats.txt
         # samtools idxstats $bam | cut -f 1 | uniq > ./Aligned.sortedByCoord.idxstats.txt
         mkdir -p ./tmp/
         python3 /opt/biorad/src/tagBamFile.py $bam ./Aligned.sortedByCoord.idxstats.txt ./tmp/ $task.cpus
-        sambamba merge -t $task.cpus ./Aligned.sortedByCoord.tagged.bam \$(find ./tmp/ | grep chr)
+        sambamba merge -t $task.cpus ./Aligned.sortedByCoord.tagged.bam \$(find ./tmp/ | grep -E 'chr|ERCC-*')
         #sambamba merge -t $task.cpus ./Aligned.sortedByCoord.tagged.bam \$(find ./tmp/ | grep .bam)
         sambamba index -t $task.cpus ./Aligned.sortedByCoord.tagged.bam
         rm -r ./tmp/
