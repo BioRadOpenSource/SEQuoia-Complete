@@ -311,7 +311,9 @@ df <- data.frame("Reads Input" = inputReads,
                  "Median 3' Bias" = rt$MEDIAN_3PRIME_BIAS,
                  "Median 5' to 3' Bias" = rt$MEDIAN_5PRIME_TO_3PRIME_BIAS,
                  "% Stranded" = rt$PCT_CORRECT_STRAND_READS * 100,
+		 "% rRNA bases" = (rna$RIBOSOMAL_BASES/rna$PF_BASES)*100,
                  check.names= F)
+		
 df <- as.data.frame(t(df)) %>% rownames_to_column()
 names(df) <- c("Metric", "Value")
 
