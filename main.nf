@@ -149,6 +149,7 @@ if (!params.skipUmi) {
 // There should only be a R1 at 
 process cutAdapt {
     label 'mid_cpu'
+    label 'high_memory'
     tag "cutAdapt on $name"
     publishDir "${params.outDir}/cutAdapt", mode: 'copy'
     
@@ -204,10 +205,9 @@ process starAlign {
         --outFilterMatchNminOverLread 0 \
         --outReadsUnmapped Fastx \
         --outSAMtype BAM SortedByCoordinate \
-        # --outSAMmultNmax 1 \
-        # ^ do not print mms, just report in NH tag
-        # --outMultimapperOrder Random \
-        # --runRNGseed 1234 \
+        #--outSAMmultNmax 1 \
+        #--outMultimapperOrder Random \
+        #--runRNGseed 1234 \
         --outFileNamePrefix ./ > star_log.txt 2>&1
     rm -rf _STARgenome
     sambamba index -t $task.cpus Aligned.sortedByCoord.out.bam
@@ -267,7 +267,7 @@ if (!params.skipUmi) {
     }
     process deduplication {
         label 'high_memory'
-        label 'mid_cpu'
+        label 'high_cpu'
         tag "dedup on $name"
         publishDir "${params.outDir}/dedup", mode: 'copy'
 

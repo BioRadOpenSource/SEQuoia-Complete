@@ -120,7 +120,7 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     libxml2-dev \
     fonts-freefont-ttf
-RUN echo "deb https://cloud.r-project.org/bin/linux/ubuntu xenial-cran35/" >> /etc/apt/sources.list
+#RUN echo "deb https://cloud.r-project.org/bin/linux/ubuntu xenial-cran35/" >> /etc/apt/sources.list
 RUN apt-get install -y r-base
 RUN Rscript -e 'install.packages(c("dplyr", "knitr", "rmarkdown", "kableExtra", "ggplot2", "plotly", "fastqcr", "data.table", "tibble", "rlist", "tinytex", "webshot"), repos = "http://cran.r-project.org")'
 RUN Rscript -e 'tinytex::install_tinytex()'
