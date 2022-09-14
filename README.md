@@ -14,28 +14,22 @@ wget -qO- https://get.nextflow.io | bash
 
 The minimum recommended version is: 19.04.1
 
-### Reference Genomes
+### Downloading Reference Genomes
+It is suggested that you copy the tar of the reference that you want locally. These commands will take a while to run.
+For full list of options see: [Sequoia Genomes](https://www.dropbox.com/sh/kqy6kt9qewqsmbl/AABSjlIs87-cWMLdLPd8eDOja?dl=0) 
 
-The reference genomes are stored in S3 for convenience. As of this
-writing. The reference genome can be found here:
-s3://dbg-cloudpipeline-data-us-west-2-prod/ref_data/sequoia_analysis/latest/.
+When downloading from Dropbox, it will add `?dl=0` to the end of each link. This needs to be removed. This can be done manually, however using the output option in wget -O you can rename the file to match what is expected. In the use case of the hg38 genome, see the example below where the dropbox link with the `?dl=0` can be saved as the expected hg38.tar.gz with the -O option. 
 
-It is suggested that you copy the tar of the reference that you want
-locally. These commands will take a while to run.
-
-```bash
-mkdir /mnt/ref_data/genome-annotations
-cd /mnt/ref_data/genome-annotations
-aws s3 cp s3://dbg-cloudpipeline-data-us-west-2-prod/ref_data/sequoia_analysis/latest/hg38.tar.gz ./
-aws s3 cp s3://dbg-cloudpipeline-data-us-west-2-prod/ref_data/sequoia_analysis/latest/mm10.tar.gz ./
-aws s3 cp s3://dbg-cloudpipeline-data-us-west-2-prod/ref_data/sequoia_analysis/latest/rnor6.tar.gz ./
+** For the current version of complete only Human (hg38), Mouse (mm10), and Rat (rnor6) are supported **
+ 
+```
+mkdir ./ref_data/genome-annotations
+cd ./ref_data/genome-annotations
+wget -O hg38.tar.gz https://www.dropbox.com/s/hm6kyp70dtbqovr/hg38.tar.gz?dl=0
 tar xvzf hg38.tar.gz
-tar xvzf rnor6.tar.gz
-tar xvzf mm10.tar.gz
-md5sum -c ./*/*.chk
 ```
 
-Then for your pipeline you will add the --genomes_base=/mnt/ref_data/2dcomplete. 
+Then for your pipeline you will add the --genomes_base=./ref_data/genome-annotations
 
 ### Testing
 
