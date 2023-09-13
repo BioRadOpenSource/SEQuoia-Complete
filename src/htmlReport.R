@@ -537,6 +537,12 @@ env <- as.data.frame(env, stringsAsFactors=FALSE) %>% tibble::rownames_to_column
 umi_tools_version <- system("umi_tools --version", intern=T)
 umi_tools_version <- strsplit(umi_tools_version, ":")[[1]][2]
 env[which(env$rowname=="UMI_TOOLS_VERSION"), 2] = gsub(" ", "", umi_tools_version)
+env[which(env$rowname=="FASTQC_VERSION"), 2] = system("grep ' fastqc' /opt/biorad/SEQuoiaComplete.yaml| cut -d '=' -f2", intern=T)
+env[which(env$rowname=="STAR_VERSION"), 2] = system("grep ' star' /opt/biorad/SEQuoiaComplete.yaml| cut -d '=' -f2", intern=T)
+env[which(env$rowname=="PICARD_VERSION"), 2] =system("grep ' picard' /opt/biorad/SEQuoiaComplete.yaml| cut -d '=' -f2", intern=T)
+env[which(env$rowname=="SUBREAD_VERSION"), 2] =system("grep ' subread' /opt/biorad/SEQuoiaComplete.yaml| cut -d '=' -f2", intern=T)
+env[which(env$rowname=="SAMBAMBA_VERSION"), 2] =system("grep ' sambamba' /opt/biorad/SEQuoiaComplete.yaml| cut -d '=' -f2", intern=T)
+env[which(env$rowname=="BEDTOOLS_VERSION"), 2] =system("grep ' bedtools' /opt/biorad/SEQuoiaComplete.yaml| cut -d '=' -f2", intern=T)
 write("Preparing to read imageInfo.txt", stderr())
 containerInfo <- read.table("/opt/biorad/imageInfo.txt", stringsAsFactors=FALSE)
 write("Read imageInfo.txt", stderr())
