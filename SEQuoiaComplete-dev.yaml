@@ -1,0 +1,42 @@
+name: SequoiaComplete
+channels:
+  - conda-forge
+  - bioconda 
+  - defaults
+  - genomedk
+dependencies:
+  - fastqc=0.11.9
+  - cutadapt=2.7
+  - star=2.7.0f
+  - picard
+  - subread=1.6.4
+  - sambamba=0.6.9
+  - samtools
+  - openssl
+  - openjdk=>8.0.312
+  - python=>3.6
+  - r-xml
+  - r-dplyr
+  - r-knitr
+  - r-kableExtra
+  - r-ggplot2
+  - r-plotly
+  - r-fastqcr
+  - r-data.table
+  - r-tibble
+  - r-rlist
+  - r-base=>4.0.3
+  - r-rmarkdown=2.5
+  - r-tinytex=0.27
+  - r-webshot
+  - r-dt
+  - pysam
+  - pandas
+  - openpyxl
+  - nbconvert
+  - phantomjs
+  - r-essentials
+  - r-rjava
+  - pandoc=1.19.2
+  - open-fonts
+  - parallel
