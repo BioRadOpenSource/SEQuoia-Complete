@@ -9,7 +9,7 @@
 - Updated to match coding standards of DSL2 and not change main functions of the code outside of making compatible with current nextflow
 - Moved the scripts to appropriate modules configuration 
 
-## main
+### main
 
 - Changed structure to make DSL2 using modules format and passing values to processes instead of global vars
 - Import modules to match DSL2 standards
