@@ -31,4 +31,3 @@ def splitBigBam(chr):
 pool = Pool(processes=cpu)
 toy_out = pool.map(splitBigBam, chrs)
 pool.close()
-
