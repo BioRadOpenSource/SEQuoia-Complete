@@ -439,7 +439,7 @@ longRNAcounts <- rbind(data.frame(Result="Total Alignments", Count=sum(longRNAco
 longRNAcounts$`Count` <- cell_spec(
   prettyNum(longRNAcounts$`Count`, big.mark=",", scientific=FALSE),
   popover = spec_popover(
-    content = c("Total number of miRNA alignments",
+    content = c("Total number of longRNA alignments",
 		"longRNA alignments assigned to features",
                 "longRNA alignments not counted due to not mapping",
                 "longRNA alignments not counted due to mapping quality below MAPQ threshold",

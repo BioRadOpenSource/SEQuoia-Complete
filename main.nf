@@ -124,6 +124,7 @@ workflow {
         deduplication(umiTagging.out.dedup_in_ch)
         splitBamMi_ch = deduplication.out.bams
         splitBamLong_ch = deduplication.out.bams
+        report_dedup = deduplication.out.report_dedup
     } else {
         splitBamMi_ch = starAlign.out.starBam_ch
         splitBamLong_ch = starAlign.out.starBam_ch
@@ -143,11 +144,11 @@ workflow {
     //generate report
     assembleReport(
         fastQc.out.fastqc_results,
-        debarcode.out.report.ifEmpty([]),
+        report_debarcode,
         cutAdapt.out.report_trim,
         starAlign.out.report_star,
         picardAlignSummary.out.report_picard,
-        deduplication.out.report_dedup.ifEmpty([]),
+        report_dedup,
         countMicroRNA.out.report_miRNACounts,
         countLongRNA.out.report_longRNACounts,
         annoDirPath
