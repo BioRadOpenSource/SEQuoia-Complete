@@ -111,7 +111,7 @@ workflow {
         report_debarcode = debarcode.out.report
     } else {
         debarcoded_ch = raw_reads
-        report_debarcode = Channel.empty()
+        report_debarcode = Channel.empty().ifEmpty([])
     }
 
     // There should only be a R1 at this point
@@ -128,7 +128,7 @@ workflow {
     } else {
         splitBamMi_ch = starAlign.out.starBam_ch
         splitBamLong_ch = starAlign.out.starBam_ch
-        report_dedup = Channel.empty()
+        report_dedup = Channel.empty().ifEmpty([])
     }
 
     splitBamMi(splitBamMi_ch, miRNABedFile)
